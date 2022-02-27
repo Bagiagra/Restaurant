@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:c="">
+<head>
+    <meta charset="UTF-8">
+    <title>Все блюда меню</title>
+</head>
+<body>
+<br>
+<br>
+<table>
+    <tr>
+        <th>id</th>
+        <th>Tип</th>
+        <th>Наименование</th>
+        <th>Описание</th>
+        <th>Цена</th>
+        <th>Операции</th>
+    </tr>
+    <c:forEach var="dish" items="${dish}">
+
+        <c:url var="updateButton" value="/dish/updateInfo">
+            <c:param name="dishId" value="${dish.id}"/>
+        </c:url>
+
+        <c:url var="deleteButton" value="/dish/deleteDish">
+            <c:param name="dishId" value="${dish.id}"/>
+        </c:url>
+        <tr>
+            <td>${dish.id}</td>
+            <td>${dish.type}</td>
+            <td>${dish.name}</td>
+            <td>${dish.description}</td>
+            <td>${dish.price}</td>
+
+            <td>
+                <input type="button" value="Обновить" onclick="window.location.href= '${updateButton}'"/>
+                <input type="button" value="Удалить" onclick="window.location.href= '${deleteButton}'"/>
+            </td>
+            <br><br>
+
+        </tr>
+    </c:forEach>
+</table>
+
+<input type="button" value="Добавить" c:onclick="window.location.href='addDish'"/>
+
+</body>
+</html>
